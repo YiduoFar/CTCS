@@ -101,12 +101,12 @@ public class TeamActivityServiceImpl extends ServiceImpl<TeamActivityMapper, Tea
         }
         // 受众
         if (activity.getActivityAudience() == 1) {
-            if (activity.getActivityAudienceName().equals(team.getTeamCollege())) {
+            if (!activity.getActivityAudienceName().equals(team.getTeamCollege())) {
                 throw new GlobalException(ResponseResultEnum.TEAM_AUDIENCE_ERROR);
             }
         }
         if (activity.getActivityAudience() == 2) {
-            if (activity.getActivityAudienceName().equals(team.getTeamSpecialty())) {
+            if (!activity.getActivityAudienceName().equals(team.getTeamSpecialty())) {
                 throw new GlobalException(ResponseResultEnum.TEAM_SPECIALTY_ERROR);
             }
         }

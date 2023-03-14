@@ -187,9 +187,9 @@ public class TeamServiceImpl extends ServiceImpl<TeamMapper, Team> implements Te
         // 队员
         List<User> users = userTeamMapper.selectUserListByTeamId(new QueryWrapper<UserTeam>().eq("ut.team_id", teamId).eq("ut.status", 1));
         // 竞赛
-        List<Competition> competitionList = teamCompetitionMapper.selectCompetitionByTeamId(teamId);
+        List<Competition> competitionList = teamCompetitionMapper.selectCompetitionByTeamIdAndStatus(teamId);
         // 活动
-        List<Activity> activityList = teamActivityMapper.selectActivityByTeamId(teamId);
+        List<Activity> activityList = teamActivityMapper.selectActivityByTeamIdAndStatus(teamId);
         // Vo
         TeamDetailVo teamDetailVo = new TeamDetailVo(user, users, team, competitionList, activityList);
         return ResponseResult.success(teamDetailVo);

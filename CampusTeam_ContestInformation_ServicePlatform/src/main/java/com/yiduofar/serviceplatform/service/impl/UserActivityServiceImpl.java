@@ -122,7 +122,7 @@ public class UserActivityServiceImpl extends ServiceImpl<UserActivityMapper, Use
         }
         if (activity.getActivityAudience() == 2) {
             // 专业
-            if (activity.getActivityAudienceName().equals(user.getSpecialty())) {
+            if (!activity.getActivityAudienceName().equals(user.getSpecialty())) {
                 throw new GlobalException(ResponseResultEnum.USER_SPECIALTY_ERROR);
             }
         }

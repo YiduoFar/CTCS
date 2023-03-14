@@ -91,7 +91,7 @@
                     是否需要组队报名
                 </div>
                 <div class="item-content-sp1">
-                    <el-switch class="switch1" v-model="activity.isTeamUp" active-color="#13ce66" inactive-color="#909399">
+                    <el-switch class="switch1" disabled v-model="activity.isTeamUp" active-color="#13ce66" inactive-color="#909399">
                     </el-switch>
                 </div>
                 <!-- 队伍人数上下限设置 -->

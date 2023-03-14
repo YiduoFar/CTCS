@@ -158,7 +158,7 @@ public class UserCompetitionServiceImpl extends ServiceImpl<UserCompetitionMappe
             }
         }
         if (competition.getCompetitionAudience() == 2) {
-            if (competition.getCompetitionAudienceName().equals(user.getSpecialty())) {
+            if (!competition.getCompetitionAudienceName().equals(user.getSpecialty())) {
                 throw new GlobalException(ResponseResultEnum.USER_SPECIALTY_ERROR);
             }
         }

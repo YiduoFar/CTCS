@@ -28,6 +28,8 @@ public interface TeamActivityMapper extends BaseMapper<TeamActivity> {
     int updateStatusById(TeamActivity teamActivity);
 
     List<Activity> selectActivityByTeamId(@Param("teamId")Integer teamId);
+
+    List<Activity> selectActivityByTeamIdAndStatus(@Param("teamId")Integer teamId);
 }
 
 

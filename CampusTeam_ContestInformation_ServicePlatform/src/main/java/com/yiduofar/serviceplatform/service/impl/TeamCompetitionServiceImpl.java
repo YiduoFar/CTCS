@@ -118,12 +118,12 @@ public class TeamCompetitionServiceImpl extends ServiceImpl<TeamCompetitionMappe
         }
         // 受众
         if (competition.getCompetitionAudience() == 1) {
-            if (competition.getCompetitionAudienceName().equals(team.getTeamCollege())) {
+            if (!competition.getCompetitionAudienceName().equals(team.getTeamCollege())) {
                 throw new GlobalException(ResponseResultEnum.TEAM_AUDIENCE_ERROR);
             }
         }
         if (competition.getCompetitionAudience() == 2) {
-            if (competition.getCompetitionAudienceName().equals(team.getTeamSpecialty())) {
+            if (!competition.getCompetitionAudienceName().equals(team.getTeamSpecialty())) {
                 throw new GlobalException(ResponseResultEnum.TEAM_SPECIALTY_ERROR);
             }
         }

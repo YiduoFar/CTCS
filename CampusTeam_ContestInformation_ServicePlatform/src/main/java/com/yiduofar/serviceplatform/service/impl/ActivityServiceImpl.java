@@ -68,11 +68,19 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity>
         if (CollectionUtils.isEmpty(ids)) {
             return ResponseResult.success(new ActivityMineVoPageTotal(new ArrayList<>(), 0L));
         }
+        System.out.println(ids);
         // 封装分页对象
         Page<Activity> page = new Page<>(queryVo.getCurrent(), queryVo.getSize());
+
+        System.out.println(queryVo);
+
         activityMapper.selectMyActivityByKeyWordAndStatus(page, ids, queryVo.getStatus(), queryVo.getKeyword());
         // 拿到分页数据 records
         List<Activity> records = page.getRecords();
+
+        System.out.println("records:" + records);
+        System.out.println("total:" + page.getTotal());
+
         Long total = page.getTotal();
         // 若队伍信息不为空，将他们和活动信息绑定为Vo组成Vo列表返回
         if (!CollectionUtils.isEmpty(teamActivities)) {

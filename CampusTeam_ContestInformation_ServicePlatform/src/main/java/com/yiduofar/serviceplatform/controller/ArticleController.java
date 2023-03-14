@@ -115,7 +115,7 @@ public class ArticleController extends ApiController {
      * @param queryVo
      * @return
      */
-    @PostMapping("/article/selectArticleByKeyword")
+    @PostMapping("/show/article/selectArticleByKeyword")
     public ResponseResult selectArticleByKeyword(QueryVo queryVo) {
         return articleService.selectArticleByKeyword(queryVo);
     }

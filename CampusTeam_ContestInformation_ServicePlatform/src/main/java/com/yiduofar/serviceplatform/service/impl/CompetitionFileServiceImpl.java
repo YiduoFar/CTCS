@@ -59,8 +59,8 @@ public class CompetitionFileServiceImpl extends ServiceImpl<CompetitionFileMappe
     @Transactional(rollbackFor = Exception.class)
     public ResponseResult uploadCompetitionFile(MultipartFile[] files, Integer competitionId, Integer type) throws IOException {
         Competition competition = competitionMapper.selectById(competitionId);
-        // 若文件上传关闭
-        if (competition.getCompetitionFileUploadIsOpen() == 0) {
+        // 若文件上传关闭 不允许上传报名文件 其余类型文件正常上传
+        if (type == 2 && competition.getCompetitionFileUploadIsOpen() == 0) {
             throw new GlobalException(ResponseResultEnum.FILE_UPLOAD_CLOSE_ERROR);
         }
         if (files.length == 0) {

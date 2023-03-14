@@ -189,6 +189,7 @@ public class UserTeamServiceImpl extends ServiceImpl<UserTeamMapper, UserTeam>
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ResponseResult fastJoinTeam(Integer userId, Integer teamInviteCode) {
         // 根据邀请码查出队伍
         List<Team> teams = teamMapper.selectList(new LambdaQueryWrapper<Team>()
@@ -203,6 +204,14 @@ public class UserTeamServiceImpl extends ServiceImpl<UserTeamMapper, UserTeam>
         // 插入新记录
         int insert = userTeamMapper.insert(userTeam);
         if (insert != 1) {
+            throw new GlobalException(ResponseResultEnum.DATABASE_ERROR);
+        }
+        // 增加队伍人员数量
+        UpdateWrapper<Team> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.setSql("team_member_num = team_member_num + 1")
+                .eq("team_id", team.getTeamId());
+        int update = teamMapper.update(team, updateWrapper);
+        if (update != 1) {
             throw new GlobalException(ResponseResultEnum.DATABASE_ERROR);
         }
         // 发消息

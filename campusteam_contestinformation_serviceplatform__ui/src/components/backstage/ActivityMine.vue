@@ -277,7 +277,7 @@ export default {
             size: 5,
             keyword: '',
             userId: '',
-            status: 1
+            status: '',
         },
         /**
          * 活动类型

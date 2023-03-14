@@ -47,4 +47,10 @@
                  left join activity a on ta.activity_id = a.activity_id
         where ta.team_id = #{teamId}
     </select>
+    <select id="selectActivityByTeamIdAndStatus" resultType="com.yiduofar.serviceplatform.domain.Activity">
+        select *
+        from team_activity ta
+                 left join activity a on ta.activity_id = a.activity_id
+        where ta.team_id = #{teamId} and ta.status = 1
+    </select>
 </mapper>

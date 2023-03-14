@@ -86,7 +86,8 @@
                     <div class="j-c-title">参加的竞赛</div>
                     <div class="j-c-list ">
                         <el-empty description="暂无比赛" :image-size="100" v-if="competitionList.length == 0"></el-empty>
-                        <div class="j-c-item ts02s" v-for="item in competitionList">
+                        <div class="j-c-item ts02s" v-for="item in competitionList"
+                            @click="$router.push({ path: '/competition_details', query: { competitionId: item.competitionId } })">
                             <!-- name -->
                             <div class="j-c-name ts02s">{{ item.competitionName }}</div>
                             <!-- status -->
@@ -111,7 +112,8 @@
                     <div class="j-a-title">参加的活动</div>
                     <div class="j-a-list ">
                         <el-empty description="暂无活动" :image-size="100" v-if="activityList.length == 0"></el-empty>
-                        <div class="j-a-item ts02s" v-for="item in activityList">
+                        <div class="j-a-item ts02s" v-for="item in activityList"
+                            @click="$router.push({ path: '/activity_details', query: { activityId: item.activityId } })">
                             <!-- name -->
                             <div class="j-a-name ts02s">{{ item.activityName }}</div>
                             <!-- status -->

@@ -57,12 +57,10 @@ Vue.prototype.$axios = axios
 Vue.prototype.$qs = qs
 Vue.prototype.$md5 = md5
 Vue.prototype.$moment = moment
-// Vue.prototype.$marked = marked
-Vue.prototype.$prefixIMG = 'http://localhost:8088/resources/'
-Vue.prototype.$suffixIMG = '.jpg'
 Vue.prototype.$GLOBALERROR = '系统错误'
 Vue.prototype.$EDITSUCCESS = '操作成功'
 Vue.prototype.$UPLOADSUCCESS = '上传成功'
+// Vue.prototype.$marked = marked
 
 axios.defaults.baseURL = "http://localhost:8088"
 
@@ -70,7 +68,7 @@ axios.defaults.baseURL = "http://localhost:8088"
  * 请求拦截
  */
 axios.interceptors.request.use((req) => {
-    // console.log('请求拦截{', req.url, '}');
+    console.log('请求拦截{', req.url, '}');
     //TODO: 用正则 匹配更多的开放接口
     if (req.url == '/login' || req.url == '/reg' || req.url.includes('/reg')) {
         return req
@@ -87,7 +85,7 @@ axios.interceptors.request.use((req) => {
  */
 axios.interceptors.response.use((res) => {
     const { code, message, data } = res.data;
-    // console.log('响应拦截{', 'code:', code, 'message:', message, 'data:', data, '}');
+    console.log('响应拦截{', 'code:', code, 'message:', message, 'data:', data, '}');
     if (code === 200 || code === 500400 || code === 500403 || code === 500405 || code === 500406 || code === 500410) {
         return res.data;
     } else {

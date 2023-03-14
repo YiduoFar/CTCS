@@ -49,4 +49,11 @@
                  left join competition c on tc.competition_id = c.competition_id
         where tc.team_id = #{teamId}
     </select>
+    <select id="selectCompetitionByTeamIdAndStatus"
+            resultType="com.yiduofar.serviceplatform.domain.Competition">
+        select *
+        from team_competition tc
+                 left join competition c on tc.competition_id = c.competition_id
+        where tc.team_id = #{teamId} and tc.status = 1
+    </select>
 </mapper>

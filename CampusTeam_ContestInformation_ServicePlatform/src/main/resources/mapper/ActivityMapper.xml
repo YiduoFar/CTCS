@@ -42,8 +42,7 @@
     </sql>
     <select id="selectMyActivityByKeyWordAndStatus" resultType="activity">
         select * from activity
-        where activity_status = #{status}
-        and activity_name like CONCAT('%', #{keyword}, '%')
+        where activity_name like CONCAT('%', #{keyword}, '%')
         and activity_id in
         <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
             #{item}

@@ -122,7 +122,7 @@ export default ({
          */
         async selectArticleByKeyword(state, queryVo) {
             return await axios({
-                url: '/article/selectArticleByKeyword',
+                url: '/show/article/selectArticleByKeyword',
                 method: 'POST',
                 data: qs.stringify(queryVo)
             })

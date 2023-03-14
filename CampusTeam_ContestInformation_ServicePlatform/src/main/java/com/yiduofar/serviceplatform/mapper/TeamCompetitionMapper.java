@@ -25,6 +25,8 @@ public interface TeamCompetitionMapper extends BaseMapper<TeamCompetition> {
     TeamCompetition selectByTeamIdsAndCompetitionId(@Param("teamIds")List<Integer> teamIds,@Param("competitionId") Integer competitionId);
 
     List<Competition> selectCompetitionByTeamId(@Param("teamId")Integer teamId);
+
+    List<Competition> selectCompetitionByTeamIdAndStatus(@Param("teamId") Integer teamId);
 }
 
 
