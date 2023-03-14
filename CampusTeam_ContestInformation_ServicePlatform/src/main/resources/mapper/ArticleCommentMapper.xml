@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.ArticleCommentMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.ArticleComment">
+            <id property="commentId" column="comment_id" jdbcType="INTEGER"/>
+            <result property="toArticleId" column="to_article_id" jdbcType="INTEGER"/>
+            <result property="toUserId" column="to_user_id" jdbcType="INTEGER"/>
+            <result property="fromUserId" column="from_user_id" jdbcType="INTEGER"/>
+            <result property="commentContent" column="comment_content" jdbcType="VARCHAR"/>
+            <result property="commentCreateTime" column="comment_create_time" jdbcType="TIMESTAMP"/>
+            <result property="commentLikeNum" column="comment_like_num" jdbcType="INTEGER"/>
+            <result property="commentTrampleNum" column="comment_trample_num" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        comment_id,to_article_id,to_user_id,
+        from_user_id,comment_content,comment_create_time,
+        comment_like_num,comment_trample_num
+    </sql>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.UserActivityMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.UserActivity">
+        <id property="userId" column="user_id" jdbcType="INTEGER"/>
+        <id property="activityId" column="activity_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id
+        ,activity_id
+    </sql>
+    <update id="updateStatusById">
+        update user_activity
+        set status = 1
+        where user_id = #{userId}
+          and activity_id = #{activityId}
+    </update>
+    <select id="selectUserListByActivityIdAndStatus" resultType="com.yiduofar.serviceplatform.domain.User">
+        select *
+        from user_activity ua
+                 left join user u on ua.user_id = u.id
+            ${ew.customSqlSegment}
+    </select>
+    <select id="selectActivityListByUserIdAndStatus" resultType="com.yiduofar.serviceplatform.domain.Activity">
+        select *
+        from user_activity ua
+                 left join activity a on ua.activity_id = a.activity_id
+        where ua.user_id = #{userId}
+          and ua.status = #{status}
+    </select>
+</mapper>

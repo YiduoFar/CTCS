@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.UserTeamMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.UserTeam">
+        <id property="userId" column="user_id" jdbcType="INTEGER"/>
+        <id property="teamId" column="team_id" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id
+        ,team_id,status
+    </sql>
+    <update id="updateStatusById">
+        update user_team
+        set status = 1
+        where user_id = #{userId}
+          and team_id = #{teamId}
+    </update>
+    <select id="selectUserListByTeamId" resultType="com.yiduofar.serviceplatform.domain.User">
+        select *
+        from user_team ut
+                 left join user u on ut.user_id = u.id
+            ${ew.customSqlSegment}
+    </select>
+    <select id="selectTeamListByUserId" resultType="com.yiduofar.serviceplatform.domain.Team">
+        select *
+        from user_team ut
+                 left join team t on ut.team_id = t.team_id
+            ${ew.customSqlSegment}
+    </select>
+    <select id="selectTeamListByUserIdOrderByTeamId" resultType="com.yiduofar.serviceplatform.domain.Team">
+        select *
+        from user_team ut
+                 left join team t on ut.team_id = t.team_id
+            ${ew.customSqlSegment}
+        order by t.team_id desc
+    </select>
+
+</mapper>

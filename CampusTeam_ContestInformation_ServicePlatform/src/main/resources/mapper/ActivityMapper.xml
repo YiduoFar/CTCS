@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.ActivityMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.Activity">
+        <id property="activityId" column="activity_id" jdbcType="INTEGER"/>
+        <result property="activityName" column="activity_name" jdbcType="VARCHAR"/>
+        <result property="activityCover" column="activity_cover" jdbcType="VARCHAR"/>
+        <result property="activityType" column="activity_type" jdbcType="TINYINT"/>
+        <result property="activityJoinedIsOpen" column="activity_joined_is_open" jdbcType="TINYINT"/>
+        <result property="activityStatus" column="activity_status" jdbcType="TINYINT"/>
+        <result property="activityStage" column="activity_stage" jdbcType="VARCHAR"/>
+        <result property="activityInformationList" column="activity_information_list" jdbcType="VARCHAR"/>
+        <result property="isTeamUp" column="is_team_up" jdbcType="TINYINT"/>
+        <result property="signUpMinTeamMemberNum" column="sign_up_min_team_member_num" jdbcType="INTEGER"/>
+        <result property="signUpMaxTeamMemberNum" column="sign_up_max_team_member_num" jdbcType="INTEGER"/>
+        <result property="activityAudience" column="activity_audience" jdbcType="TINYINT"/>
+        <result property="activityAudienceName" column="activity_audience_name" jdbcType="VARCHAR"/>
+        <result property="activityJoinedNum" column="activity_joined_num" jdbcType="INTEGER"/>
+        <result property="activityStageNow" column="activity_stage_now" jdbcType="TINYINT"/>
+        <result property="activityInitiatorId" column="activity_initiator_id" jdbcType="INTEGER"/>
+        <result property="isOnline" column="is_online" jdbcType="TINYINT"/>
+        <result property="activityPlace" column="activity_place" jdbcType="VARCHAR"/>
+        <result property="activityBeginTime" column="activity_begin_time" jdbcType="TIMESTAMP"/>
+        <result property="activityEndTime" column="activity_end_time" jdbcType="TIMESTAMP"/>
+        <result property="activityPoints" column="activity_points" jdbcType="INTEGER"/>
+        <result property="activityPublishDate" column="activity_publish_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        activity_id
+        ,activity_name,activity_cover,
+        activity_type,activity_joined_is_open,activity_status,
+        activity_stage,activity_information_list,is_team_up,
+        sign_up_min_team_member_num,sign_up_max_team_member_num,activity_audience,
+        activity_audience_name,activity_joined_num,activity_stage_now,
+        activity_initiator_id,is_online,activity_place,
+        activity_begin_time,activity_end_time,activity_points,
+        activity_publish_date
+    </sql>
+    <select id="selectMyActivityByKeyWordAndStatus" resultType="activity">
+        select * from activity
+        where activity_status = #{status}
+        and activity_name like CONCAT('%', #{keyword}, '%')
+        and activity_id in
+        <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        order by activity_publish_date desc
+    </select>
+    <select id="selectPage2" resultType="activity">
+        select * from activity
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        order by activity_joined_num desc
+    </select>
+    <select id="selectLatestActivity" resultType="com.yiduofar.serviceplatform.domain.Activity">
+        SELECT *
+        FROM activity
+        ORDER BY activity_publish_date desc LIMIT 0, 5
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.ArticleMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.Article">
+        <id property="articleId" column="article_id" jdbcType="INTEGER"/>
+        <result property="articleAuthorId" column="article_author_id" jdbcType="INTEGER"/>
+        <result property="articleTitle" column="article_title" jdbcType="VARCHAR"/>
+        <result property="articlePublishDate" column="article_publish_date" jdbcType="TIMESTAMP"/>
+        <result property="articleDigest" column="article_digest" jdbcType="VARCHAR"/>
+        <result property="articleContent" column="article_content" jdbcType="VARCHAR"/>
+        <result property="articleLabel" column="article_label" jdbcType="VARCHAR"/>
+        <result property="articlePageView" column="article_page_view" jdbcType="INTEGER"/>
+        <result property="articleLikeNum" column="article_like_num" jdbcType="INTEGER"/>
+        <result property="articleTrampleNum" column="article_trample_num" jdbcType="INTEGER"/>
+        <result property="articleCommentNum" column="article_comment_num" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        article_id
+        ,article_author_id,article_title,
+        article_publish_date,article_digest,article_content,
+        article_label,article_page_view,article_like_num,
+        article_trample_num,article_comment_num
+    </sql>
+    <select id="selectPage2" resultType="com.yiduofar.serviceplatform.domain.Article">
+        select *
+        from article ${ew.customSqlSegment}
+        order by article_publish_date desc
+    </select>
+</mapper>

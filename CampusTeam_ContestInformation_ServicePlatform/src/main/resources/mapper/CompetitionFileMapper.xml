@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.CompetitionFileMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.CompetitionFile">
+            <id property="competitionFileId" column="competition_file_id" jdbcType="INTEGER"/>
+            <id property="competitionId" column="competition_id" jdbcType="INTEGER"/>
+            <result property="competitionFileName" column="competition_file_name" jdbcType="VARCHAR"/>
+            <result property="competitionFileUrl" column="competition_file_url" jdbcType="VARCHAR"/>
+            <result property="competitionFileAnnounceTime" column="competition_file_announce_time" jdbcType="TIMESTAMP"/>
+            <result property="competitionFileType" column="competition_file_type" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        competition_file_id,competition_id,competition_file_name,
+        competition_file_url,competition_file_announce_time,competition_file_type
+    </sql>
+</mapper>

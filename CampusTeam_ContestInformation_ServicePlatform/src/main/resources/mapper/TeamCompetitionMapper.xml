@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.TeamCompetitionMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.TeamCompetition">
+        <id property="teamId" column="team_id" jdbcType="INTEGER"/>
+        <id property="competitionId" column="competition_id" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        team_id
+        ,competition_id,status
+    </sql>
+    <update id="updateStatusById">
+        update team_competition
+        set status = 1
+        where team_id = #{teamId}
+          and competition_id = #{competitionId}
+    </update>
+    <select id="selectTeamListByCompetitionIdAndStatus" resultType="com.yiduofar.serviceplatform.domain.Team">
+        select *
+        from team_competition tc
+                 left join team t on tc.team_id = t.team_id
+            ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectTeamCompetitionList" resultType="com.yiduofar.serviceplatform.domain.TeamCompetition">
+        select *
+        from team_competition tc
+                 left join team t on tc.team_id = t.team_id
+        where t.team_caption_id = #{userId}
+          and tc.status = #{status}
+    </select>
+    <select id="selectByTeamIdsAndCompetitionId" resultType="teamCompetition">
+        select *
+        from team_competition
+        where competition_id = #{competitionId}
+        and team_id in
+        <foreach collection="teamIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectCompetitionByTeamId" resultType="com.yiduofar.serviceplatform.domain.Competition">
+        select *
+        from team_competition tc
+                 left join competition c on tc.competition_id = c.competition_id
+        where tc.team_id = #{teamId}
+    </select>
+</mapper>

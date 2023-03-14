@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.UserCompetitionMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.UserCompetition">
+        <id property="userId" column="user_id" jdbcType="INTEGER"/>
+        <id property="competitionId" column="competition_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id
+        ,competition_id
+    </sql>
+    <update id="updateStatusById">
+        update user_competition
+        set status = 1
+        where user_id = #{userId}
+          and competition_id = #{competitionId}
+    </update>
+    <select id="selectUserListByCompetitionIdAndStatus" resultType="com.yiduofar.serviceplatform.domain.User">
+        select *
+        from user_competition uc
+                 left join user u on uc.user_id = u.id
+            ${ew.customSqlSegment}
+    </select>
+    <select id="selectCompetitionListByUserIdAndStatus" resultType="com.yiduofar.serviceplatform.domain.Competition">
+        select *
+        from user_competition uc
+                 left join competition c on uc.competition_id = c.competition_id
+        where uc.user_id = #{userId}
+          and uc.status = #{status}
+    </select>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.CompetitionMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.Competition">
+        <id property="competitionId" column="competition_id" jdbcType="INTEGER"/>
+        <result property="competitionName" column="competition_name" jdbcType="VARCHAR"/>
+        <result property="competitionJoinedNum" column="competition_joined_num" jdbcType="INTEGER"/>
+        <result property="competitionType" column="competition_type" jdbcType="TINYINT"/>
+        <result property="isTeamUp" column="is_team_up" jdbcType="TINYINT"/>
+        <result property="signUpMinTeamMemberNum" column="sign_up_min_team_member_num" jdbcType="INTEGER"/>
+        <result property="signUpMaxTeamMemberNum" column="sign_up_max_team_member_num" jdbcType="INTEGER"/>
+        <result property="competitionAudience" column="competition_audience" jdbcType="TINYINT"/>
+        <result property="competitionAudienceName" column="competition_audience_name" jdbcType="VARCHAR"/>
+        <result property="competitionStageNow" column="competition_stage_now" jdbcType="TINYINT"/>
+        <result property="competitionStage" column="competition_stage" jdbcType="VARCHAR"/>
+        <result property="competitionUndertaker" column="competition_undertaker" jdbcType="VARCHAR"/>
+        <result property="competitionUndertaker2" column="competition_undertaker2" jdbcType="VARCHAR"/>
+        <result property="competitionUndertaker3Id" column="competition_undertaker3_id" jdbcType="INTEGER"/>
+        <result property="competitionAdvisorList" column="competition_advisor_list" jdbcType="VARCHAR"/>
+        <result property="competitionInformationList" column="competition_information_list" jdbcType="VARCHAR"/>
+        <result property="competitionBeginTime" column="competition_begin_time" jdbcType="TIMESTAMP"/>
+        <result property="competitionEndTime" column="competition_end_time" jdbcType="TIMESTAMP"/>
+        <result property="competitionExtraPoints" column="competition_extra_points" jdbcType="INTEGER"/>
+        <result property="competitionStatus" column="competition_status" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        competition_id
+        ,competition_name,competition_joined_num,
+        competition_type,is_team_up,sign_up_min_team_member_num,
+        sign_up_max_team_member_num,competition_audience,competition_audience_name,
+        competition_stage_now,competition_stage,competition_undertaker,
+        competition_undertaker2,competition_undertaker3_id,competition_advisor_list,
+        competition_information_list,competition_begin_time,competition_end_time,
+        competition_extra_points,competition_status
+    </sql>
+    <select id="selectCompetitionByUserIdAndKeyWord" resultType="competition">
+        --         select *
+--         from user_competition uc
+--                  left join competition c on uc.competition_id = c.competition_id
+--             ${ew.customSqlSegment}
+    </select>
+    <select id="selectTotalCompetitionByUserIdAndKeyWord" resultType="Integer">
+        select count(*)
+        from user_competition uc
+                 left join competition c on uc.competition_id = c.competition_id
+            ${ew.customSqlSegment}
+    </select>
+    <select id="selectPageByIdAndKeyword" resultType="competition">
+        select * from competition
+        where competition_status = #{status}
+        and competition_name like CONCAT('%', #{keyword}, '%')
+        and competition_id in
+        <foreach collection="ids" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        order by competition_publish_date desc
+    </select>
+
+    <select id="selectPage2" resultType="competition">
+        select * from competition
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        order by competition_publish_date desc
+    </select>
+
+    <select id="selectSlideShowVo" resultType="com.yiduofar.serviceplatform.vo.SlideShowVo">
+        select competition_id, competition_name, competition_cover
+        from competition
+        where competition_status = 1
+    </select>
+</mapper>

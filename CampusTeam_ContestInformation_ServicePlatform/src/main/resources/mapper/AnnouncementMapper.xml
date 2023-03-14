@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.AnnouncementMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.Announcement">
+        <id property="announcementId" column="announcement_id" jdbcType="INTEGER"/>
+        <result property="announcementTitle" column="announcement_titile" jdbcType="VARCHAR"/>
+        <result property="announcementContent" column="announcement_content" jdbcType="VARCHAR"/>
+        <result property="announcementPublishTime" column="announcement_publish_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        announcement_id
+        ,announcement_titile,announcement_content,
+        announcement_publish_time
+    </sql>
+    <select id="selectPage2" resultType="com.yiduofar.serviceplatform.domain.Announcement">
+        select *
+        from announcement
+        order by announcement_publish_time desc
+    </select>
+</mapper>

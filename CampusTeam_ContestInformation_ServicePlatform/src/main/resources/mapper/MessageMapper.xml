@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.MessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.Message">
+        <id property="messageId" column="message_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="messageContent" column="message_content" jdbcType="VARCHAR"/>
+        <result property="messageTime" column="message_time" jdbcType="TIMESTAMP"/>
+        <result property="messageUrl" column="message_url" jdbcType="VARCHAR"/>
+        <result property="messageType" column="message_type" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        message_id
+        ,user_id,message_content,
+        message_time,message_url,message_type
+    </sql>
+    <select id="selectMessageByUserIdAndTeamId" resultType="com.yiduofar.serviceplatform.domain.Message">
+        SELECT *
+        FROM message
+        WHERE user_id = #{userId}
+           or team_id in
+        <foreach collection="teamIds" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.User">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+            <result property="userHead" column="user_head" jdbcType="VARCHAR"/>
+            <result property="sex" column="sex" jdbcType="TINYINT"/>
+            <result property="intro" column="intro" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+            <result property="identity" column="identity" jdbcType="TINYINT"/>
+            <result property="number" column="number" jdbcType="VARCHAR"/>
+            <result property="college" column="college" jdbcType="VARCHAR"/>
+            <result property="specialty" column="specialty" jdbcType="VARCHAR"/>
+            <result property="clazz" column="clazz" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="regDate" column="reg_date" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_name,user_head,
+        sex,intro,phone,
+        real_name,identity,number,
+        college,specialty,clazz,
+        email,reg_date,status
+    </sql>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.ActivityFileMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.ActivityFile">
+            <id property="activityFileId" column="activity_file_id" jdbcType="INTEGER"/>
+            <id property="activityId" column="activity_id" jdbcType="INTEGER"/>
+            <result property="activityFileName" column="activity_file_name" jdbcType="VARCHAR"/>
+            <result property="activityFileUrl" column="activity_file_url" jdbcType="VARCHAR"/>
+            <result property="activityFileAnnounceTime" column="activity_file_announce_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        activity_file_id,activity_id,activity_file_name,
+        activity_file_url,activity_file_announce_time
+    </sql>
+</mapper>

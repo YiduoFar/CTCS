@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiduofar.serviceplatform.mapper.TeamMapper">
+
+    <resultMap id="BaseResultMap" type="com.yiduofar.serviceplatform.domain.Team">
+        <id property="teamId" column="team_id" jdbcType="INTEGER"/>
+        <result property="teamLogo" column="team_logo" jdbcType="VARCHAR"/>
+        <result property="teamName" column="team_name" jdbcType="VARCHAR"/>
+        <result property="teamIntro" column="team_intro" jdbcType="VARCHAR"/>
+        <result property="teamCreateTime" column="team_create_time" jdbcType="TIMESTAMP"/>
+        <result property="teamCaptionId" column="team_caption_id" jdbcType="INTEGER"/>
+        <result property="teamMemberNumMax" column="team_member_num_max" jdbcType="INTEGER"/>
+        <result property="teamMemberNum" column="team_member_num" jdbcType="INTEGER"/>
+        <result property="teamStar" column="team_star" jdbcType="DOUBLE"/>
+        <result property="teamLabel" column="team_label" jdbcType="VARCHAR"/>
+        <result property="teamStatus" column="team_status" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        team_id
+        ,team_logo,team_name,
+        team_intro,team_create_time,team_caption_id,
+        team_member_num_max,team_member_num,team_star,
+        team_label,team_status
+    </sql>
+    <select id="selectIdsByCaptionId" resultType="java.lang.Integer">
+        select team_id
+        from team
+        where team_caption_id = #{userId}
+    </select>
+    <select id="selectPage2" resultType="com.yiduofar.serviceplatform.domain.Team">
+        select * from team
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        order by team_create_time desc
+    </select>
+    <select id="selectTeamStar" resultType="com.yiduofar.serviceplatform.vo.TeamStarVo">
+        select team_name, team_star
+        from team
+        order by team_star desc
+    </select>
+</mapper>
